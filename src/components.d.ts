@@ -6,10 +6,34 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface Cv1AmbulanceWlEditor {
+        "entryId": string;
+    }
     interface Cv1AmbulanceWlList {
     }
 }
+export interface Cv1AmbulanceWlEditorCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCv1AmbulanceWlEditorElement;
+}
 declare global {
+    interface HTMLCv1AmbulanceWlEditorElementEventMap {
+        "editor-closed": string;
+    }
+    interface HTMLCv1AmbulanceWlEditorElement extends Components.Cv1AmbulanceWlEditor, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCv1AmbulanceWlEditorElementEventMap>(type: K, listener: (this: HTMLCv1AmbulanceWlEditorElement, ev: Cv1AmbulanceWlEditorCustomEvent<HTMLCv1AmbulanceWlEditorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCv1AmbulanceWlEditorElementEventMap>(type: K, listener: (this: HTMLCv1AmbulanceWlEditorElement, ev: Cv1AmbulanceWlEditorCustomEvent<HTMLCv1AmbulanceWlEditorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLCv1AmbulanceWlEditorElement: {
+        prototype: HTMLCv1AmbulanceWlEditorElement;
+        new (): HTMLCv1AmbulanceWlEditorElement;
+    };
     interface HTMLCv1AmbulanceWlListElement extends Components.Cv1AmbulanceWlList, HTMLStencilElement {
     }
     var HTMLCv1AmbulanceWlListElement: {
@@ -17,13 +41,24 @@ declare global {
         new (): HTMLCv1AmbulanceWlListElement;
     };
     interface HTMLElementTagNameMap {
+        "cv1-ambulance-wl-editor": HTMLCv1AmbulanceWlEditorElement;
         "cv1-ambulance-wl-list": HTMLCv1AmbulanceWlListElement;
     }
 }
 declare namespace LocalJSX {
+    interface Cv1AmbulanceWlEditor {
+        "entryId"?: string;
+        "onEditor-closed"?: (event: Cv1AmbulanceWlEditorCustomEvent<string>) => void;
+    }
     interface Cv1AmbulanceWlList {
     }
+
+    interface Cv1AmbulanceWlEditorAttributes {
+        "entryId": string;
+    }
+
     interface IntrinsicElements {
+        "cv1-ambulance-wl-editor": Omit<Cv1AmbulanceWlEditor, keyof Cv1AmbulanceWlEditorAttributes> & { [K in keyof Cv1AmbulanceWlEditor & keyof Cv1AmbulanceWlEditorAttributes]?: Cv1AmbulanceWlEditor[K] } & { [K in keyof Cv1AmbulanceWlEditor & keyof Cv1AmbulanceWlEditorAttributes as `attr:${K}`]?: Cv1AmbulanceWlEditorAttributes[K] } & { [K in keyof Cv1AmbulanceWlEditor & keyof Cv1AmbulanceWlEditorAttributes as `prop:${K}`]?: Cv1AmbulanceWlEditor[K] };
         "cv1-ambulance-wl-list": Cv1AmbulanceWlList;
     }
 }
@@ -31,6 +66,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "cv1-ambulance-wl-editor": LocalJSX.IntrinsicElements["cv1-ambulance-wl-editor"] & JSXBase.HTMLAttributes<HTMLCv1AmbulanceWlEditorElement>;
             "cv1-ambulance-wl-list": LocalJSX.IntrinsicElements["cv1-ambulance-wl-list"] & JSXBase.HTMLAttributes<HTMLCv1AmbulanceWlListElement>;
         }
     }
