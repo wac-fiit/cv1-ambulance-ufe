@@ -6,6 +6,12 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface Cv1AmbulanceWlApp {
+        /**
+          * @default ""
+         */
+        "basePath": string;
+    }
     interface Cv1AmbulanceWlEditor {
         "entryId": string;
     }
@@ -16,7 +22,17 @@ export interface Cv1AmbulanceWlEditorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLCv1AmbulanceWlEditorElement;
 }
+export interface Cv1AmbulanceWlListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCv1AmbulanceWlListElement;
+}
 declare global {
+    interface HTMLCv1AmbulanceWlAppElement extends Components.Cv1AmbulanceWlApp, HTMLStencilElement {
+    }
+    var HTMLCv1AmbulanceWlAppElement: {
+        prototype: HTMLCv1AmbulanceWlAppElement;
+        new (): HTMLCv1AmbulanceWlAppElement;
+    };
     interface HTMLCv1AmbulanceWlEditorElementEventMap {
         "editor-closed": string;
     }
@@ -34,30 +50,53 @@ declare global {
         prototype: HTMLCv1AmbulanceWlEditorElement;
         new (): HTMLCv1AmbulanceWlEditorElement;
     };
+    interface HTMLCv1AmbulanceWlListElementEventMap {
+        "entry-clicked": string;
+    }
     interface HTMLCv1AmbulanceWlListElement extends Components.Cv1AmbulanceWlList, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCv1AmbulanceWlListElementEventMap>(type: K, listener: (this: HTMLCv1AmbulanceWlListElement, ev: Cv1AmbulanceWlListCustomEvent<HTMLCv1AmbulanceWlListElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCv1AmbulanceWlListElementEventMap>(type: K, listener: (this: HTMLCv1AmbulanceWlListElement, ev: Cv1AmbulanceWlListCustomEvent<HTMLCv1AmbulanceWlListElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLCv1AmbulanceWlListElement: {
         prototype: HTMLCv1AmbulanceWlListElement;
         new (): HTMLCv1AmbulanceWlListElement;
     };
     interface HTMLElementTagNameMap {
+        "cv1-ambulance-wl-app": HTMLCv1AmbulanceWlAppElement;
         "cv1-ambulance-wl-editor": HTMLCv1AmbulanceWlEditorElement;
         "cv1-ambulance-wl-list": HTMLCv1AmbulanceWlListElement;
     }
 }
 declare namespace LocalJSX {
+    interface Cv1AmbulanceWlApp {
+        /**
+          * @default ""
+         */
+        "basePath"?: string;
+    }
     interface Cv1AmbulanceWlEditor {
         "entryId"?: string;
         "onEditor-closed"?: (event: Cv1AmbulanceWlEditorCustomEvent<string>) => void;
     }
     interface Cv1AmbulanceWlList {
+        "onEntry-clicked"?: (event: Cv1AmbulanceWlListCustomEvent<string>) => void;
     }
 
+    interface Cv1AmbulanceWlAppAttributes {
+        "basePath": string;
+    }
     interface Cv1AmbulanceWlEditorAttributes {
         "entryId": string;
     }
 
     interface IntrinsicElements {
+        "cv1-ambulance-wl-app": Omit<Cv1AmbulanceWlApp, keyof Cv1AmbulanceWlAppAttributes> & { [K in keyof Cv1AmbulanceWlApp & keyof Cv1AmbulanceWlAppAttributes]?: Cv1AmbulanceWlApp[K] } & { [K in keyof Cv1AmbulanceWlApp & keyof Cv1AmbulanceWlAppAttributes as `attr:${K}`]?: Cv1AmbulanceWlAppAttributes[K] } & { [K in keyof Cv1AmbulanceWlApp & keyof Cv1AmbulanceWlAppAttributes as `prop:${K}`]?: Cv1AmbulanceWlApp[K] };
         "cv1-ambulance-wl-editor": Omit<Cv1AmbulanceWlEditor, keyof Cv1AmbulanceWlEditorAttributes> & { [K in keyof Cv1AmbulanceWlEditor & keyof Cv1AmbulanceWlEditorAttributes]?: Cv1AmbulanceWlEditor[K] } & { [K in keyof Cv1AmbulanceWlEditor & keyof Cv1AmbulanceWlEditorAttributes as `attr:${K}`]?: Cv1AmbulanceWlEditorAttributes[K] } & { [K in keyof Cv1AmbulanceWlEditor & keyof Cv1AmbulanceWlEditorAttributes as `prop:${K}`]?: Cv1AmbulanceWlEditor[K] };
         "cv1-ambulance-wl-list": Cv1AmbulanceWlList;
     }
@@ -66,6 +105,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "cv1-ambulance-wl-app": LocalJSX.IntrinsicElements["cv1-ambulance-wl-app"] & JSXBase.HTMLAttributes<HTMLCv1AmbulanceWlAppElement>;
             "cv1-ambulance-wl-editor": LocalJSX.IntrinsicElements["cv1-ambulance-wl-editor"] & JSXBase.HTMLAttributes<HTMLCv1AmbulanceWlEditorElement>;
             "cv1-ambulance-wl-list": LocalJSX.IntrinsicElements["cv1-ambulance-wl-list"] & JSXBase.HTMLAttributes<HTMLCv1AmbulanceWlListElement>;
         }
