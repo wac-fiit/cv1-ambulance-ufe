@@ -13,6 +13,8 @@ export class Cv1AmbulanceWlApp {
   @State() private relativePath = "";
 
   @Prop() basePath: string="";
+  @Prop() apiBase: string;
+  @Prop() ambulanceId: string;
 
   componentWillLoad() {
     const baseUri = new URL(this.basePath, document.baseURI || "/").pathname;
@@ -55,8 +57,9 @@ export class Cv1AmbulanceWlApp {
         ? <cv1-ambulance-wl-editor entry-id={entryId}
             oneditor-closed={ () => navigate("./list")} >
           </cv1-ambulance-wl-editor>
-        : <cv1-ambulance-wl-list onentry-clicked={ (ev: CustomEvent<string>)=> navigate("./entry/" + ev.detail) } >
-          
+        : <cv1-ambulance-wl-list ambulance-id={this.ambulanceId} api-base={this.apiBase}
+          onentry-clicked={ (ev: CustomEvent<string>)=> navigate("./entry/" + ev.detail) } >
+
         </cv1-ambulance-wl-list>
         }
 
